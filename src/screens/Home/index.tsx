@@ -11,6 +11,8 @@ export function Home() {
     const [completedTasks, setCompletedTasks] = useState(0); 
     const [createdTasks, setCreatedTasks] = useState(0); 
 
+    console.log(tasks)
+
     function handleAddNewTask() {
         if (tasks.includes(newTask)) {
             return Alert.alert("Tarefa repetida", "Você já colocou essa tarefa em sua lista de tarefas!")
@@ -21,7 +23,6 @@ export function Home() {
         }
 
         setTasks(prevState => [...prevState, newTask])
-        setCreatedTasks(createdTasks + 1); 
         setNewTask('')
     }
 
@@ -37,9 +38,7 @@ export function Home() {
                   
                     if (isTaskDone) {
                         setCompletedTasks(prevCompletedTasks => prevCompletedTasks - 1);
-                    } else {
-                        setCreatedTasks(prevCreatedTasks => prevCreatedTasks - 1);
-                    }
+                    } 
                 }
             },
             {
@@ -50,11 +49,9 @@ export function Home() {
     }
     function handleToggleTask(isDone: boolean) {
         if (isDone) {
-            setCompletedTasks(completedTasks + 1); 
-            setCreatedTasks(createdTasks - 1); 
+             setCompletedTasks(completedTasks + 1)
         } else {
             setCompletedTasks(completedTasks - 1); 
-            setCreatedTasks(createdTasks + 1); 
         }
     }
 
@@ -86,7 +83,7 @@ export function Home() {
                 <View style={styles.status}>
                     <View style={styles.eachStatus}>
                         <Text style={[styles.texts, { color: '#4EA8DE' }]}>Criadas</Text>
-                        <Text style={styles.number}>{createdTasks}</Text>
+                        <Text style={styles.number}>{tasks.length}</Text>
                     </View>
 
                     <View style={styles.eachStatus}>
